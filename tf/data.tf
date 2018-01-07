@@ -1,8 +1,7 @@
-# Most Recent Stable CoreOS AMI for region
-data "aws_ami" "coreos" {
+# Packer Built AMI for this app
+data "aws_ami" "sample_app" {
   most_recent = true
-
-  owners = ["595879546273"]
+  owners      = ["098755368174"]
 
   filter {
     name   = "architecture"
@@ -10,12 +9,12 @@ data "aws_ami" "coreos" {
   }
 
   filter {
-    name = "virtualization-type"
+    name   = "virtualization-type"
     values = ["hvm"]
   }
 
   filter {
     name   = "name"
-    values = ["CoreOS-stable-*"]
+    values = ["robertjscott.ca/sample-app-*"]
   }
 }

@@ -1,0 +1,14 @@
+[Unit]
+Description=SampleApp
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill sample-app
+ExecStartPre=-/usr/bin/docker rm sample-app
+ExecStartPre=/usr/bin/docker pull quay.io/robertjscott/sample-app-server:0.1.0
+ExecStart=/usr/bin/docker run --name sample-app -p 8080:8080 -e PORT=8080 --cap-drop ALL --read-only --restart always quay.io/robertjscott/sample-app-server:0.1.0
+
+[Install]
+WantedBy=multi-user.target
